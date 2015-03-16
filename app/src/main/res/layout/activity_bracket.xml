@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/randomizer_type_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:id="@+id/bracket_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="1sp"/>
+
+    <Button
+        android:id="@+id/next_game_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Next Game"/>
+
+    <Button
+        android:id="@+id/play_all_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Complete Bracket"/>
+
+</LinearLayout>

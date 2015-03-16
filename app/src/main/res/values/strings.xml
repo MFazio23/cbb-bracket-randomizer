@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CBB Bracket Randomizer</string>
+
+    <string name="loading_data">Loading team and bracket data…</string>
+    <string name="action_about">About</string>
+    <string name="logo_attribution"><a href="http://www.freepik.com/free-photos-vectors/logo">Basketball logo vector designed by Freepik</a></string>
+</resources>
