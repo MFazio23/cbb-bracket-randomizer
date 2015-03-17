@@ -109,8 +109,8 @@ public class BracketRandomizer {
         return this.ratings != null && !this.ratings.isEmpty();
     }
 
-    public void playGame(final int position) {
-        this.currentBracket.playGame(position, this.randomizer, this.ratingType);
+    public Team playGame(final int position) {
+        return this.currentBracket.playGame(position, this.randomizer, this.ratingType);
     }
 
     public Randomizer getRandomizer() {

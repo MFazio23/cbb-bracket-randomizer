@@ -2,6 +2,8 @@ package mfazio.me.cbbbracketrandomizer;
 
 import android.app.Application;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.google.gson.JsonObject;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -21,11 +23,22 @@ public class CBBBracketRandomizerApplication extends Application {
     private List<Team> teams;
     private List<JsonObject> jsonGames;
     private List<Rating> rpiRatings;
+    private Tracker tracker;
 
     @Override
     public void onCreate() {
         super.onCreate();
         this.bracketRandomizer = new BracketRandomizer();
+    }
+
+    public synchronized Tracker getTracker() {
+        if(this.tracker == null) {
+            final GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+
+            this.tracker = analytics.newTracker("UA-52217136-2");
+        }
+
+        return this.tracker;
     }
 
     public BracketRandomizer getBracketRandomizer() {

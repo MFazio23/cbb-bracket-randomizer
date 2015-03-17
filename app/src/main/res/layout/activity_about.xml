@@ -42,6 +42,9 @@
                 android:text="@string/about_contact_email"
                 android:id="@+id/about_contact_email"
                 android:layout_gravity="center_horizontal"
+                android:onClick="goToEmail"
+                android:clickable="true"
+                android:textColorLink="@color/link_colors"
                 android:textSize="18sp"/>
 
             <TextView
@@ -50,6 +53,9 @@
                 android:text="@string/about_contact_twitter"
                 android:id="@+id/about_contact_twitter"
                 android:layout_gravity="center_horizontal"
+                android:onClick="goToTwitter"
+                android:clickable="true"
+                android:textColorLink="@color/link_colors"
                 android:textSize="18sp"/>
 
             </LinearLayout>
@@ -59,6 +65,8 @@
             android:layout_height="wrap_content"
             android:text="@string/logo_attribution"
             android:id="@+id/about_logo"
+            android:textColorLink="@color/link_colors"
+            android:clickable="true"
             android:layout_marginBottom="20dp"/>
 
         <TextView

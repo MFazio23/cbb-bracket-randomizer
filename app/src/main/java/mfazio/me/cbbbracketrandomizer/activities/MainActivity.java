@@ -1,34 +1,27 @@
 package mfazio.me.cbbbracketrandomizer.activities;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.mfazio.cbbbracketrandomizer.BracketRandomizer;
-import me.mfazio.cbbbracketrandomizer.dataloaders.KimonoDataLoader;
-import me.mfazio.cbbbracketrandomizer.randomizers.CoinFlipRandomizer;
-import me.mfazio.cbbbracketrandomizer.randomizers.GenericRatingRandomizer;
 import me.mfazio.cbbbracketrandomizer.randomizers.Randomizer;
 import me.mfazio.cbbbracketrandomizer.ratings.Rating;
-import me.mfazio.cbbbracketrandomizer.ratingsmappers.RatingsMapper;
 import me.mfazio.cbbbracketrandomizer.types.Team;
 import mfazio.me.cbbbracketrandomizer.CBBBracketRandomizerApplication;
 import mfazio.me.cbbbracketrandomizer.R;
@@ -94,6 +87,12 @@ public class MainActivity extends ActionBarActivity implements DataLoaderActivit
                 }
             }
         });
+
+        final Tracker tracker = this.app.getTracker();
+        tracker.setScreenName("Main");
+        tracker.send(
+            new HitBuilders.ScreenViewBuilder().build()
+        );
     }
 
     @Override

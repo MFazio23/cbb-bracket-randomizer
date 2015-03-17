@@ -70,7 +70,7 @@ public class Bracket {
         return this.games.get(gameNumber);
     }
 
-    public void playGame(final int gameNumber, final Randomizer randomizer, final Rating.RatingType ratingType) {
+    public Team playGame(final int gameNumber, final Randomizer randomizer, final Rating.RatingType ratingType) {
         final Game game = this.games.get(gameNumber);
 
         if (game.getTeamA() != null && game.getTeamB() != null) {
@@ -87,7 +87,11 @@ public class Bracket {
             this.games.set(gameNumber, game);
 
             this.addToGame(this.getNextGameNumber(gameNumber), this.getTeamAIndicator(gameNumber), winner);
+
+            return winner;
         }
+
+        return null;
     }
 
     public Team playFullBracket(final Randomizer randomizer) {

@@ -6,7 +6,7 @@
     <string name="logo_attribution"><a href="http://www.freepik.com/free-photos-vectors/logo">Basketball logo vector designed by Freepik</a></string>
     <string name="about_fazio">College Basketball Bracket Randomizer app created by Michael and Emily Fazio.</string>
     <string name="about_contact_header">Contact Info:</string>
-    <string name="about_contact_email">Email: android@mfazio.me</string>
-    <string name="about_contact_twitter">Twitter: \@faziodev</string>
+    <string name="about_contact_email">Email: <a href="#">android@mfazio.me</a></string>
+    <string name="about_contact_twitter">Twitter: <a href="#">\@faziodev</a></string>
     <string name="about_ncaa">This app is in no way affiliated with the National Collegiate Athletic Association (NCAA) or any of its member schools.</string>
 </resources>
