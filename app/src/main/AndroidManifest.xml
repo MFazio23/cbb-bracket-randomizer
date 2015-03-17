@@ -33,9 +33,12 @@
 
         <activity
             android:name=".activities.BracketActivity"
-            android:screenOrientation="portrait" />
-
-
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity"/>
+        </activity>
     </application>
 
 

@@ -7,24 +7,29 @@
     <TextView
         android:id="@+id/randomizer_type_label"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:text="Randomizer Type"
+        android:background="@drawable/text_view_border"/>
 
     <ListView
         android:id="@+id/bracket_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:dividerHeight="1sp"/>
-
-    <Button
-        android:id="@+id/next_game_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play Next Game"/>
+        android:dividerHeight="1sp"
+        android:footerDividersEnabled="false"
+        android:layout_weight="1"/>
 
     <Button
         android:id="@+id/play_all_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Complete Bracket"/>
+        android:onClick="playAll"
+        android:text="Complete Bracket"
+        android:height="14dp"
+        android:textSize="22sp"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

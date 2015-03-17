@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import me.mfazio.cbbbracketrandomizer.BracketRandomizer;
 import mfazio.me.cbbbracketrandomizer.CBBBracketRandomizerApplication;
@@ -17,22 +19,30 @@ import mfazio.me.cbbbracketrandomizer.adapters.BracketAdapter;
 public class BracketActivity extends ActionBarActivity {
 
     private BracketRandomizer bracketRandomizer;
+    private BracketAdapter bracketAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_bracket);
 
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        final String randomizerType = this.getIntent().getStringExtra("randomizerType");
+
         this.bracketRandomizer = ((CBBBracketRandomizerApplication) this.getApplication()).getBracketRandomizer();
 
+        ((TextView)this.findViewById(R.id.randomizer_type_label)).setText("Randomizer Type: " + randomizerType);
+
         final ListView bracketList = (ListView) this.findViewById(R.id.bracket_list);
-        final BracketAdapter bracketAdapter = new BracketAdapter(
+        this.bracketAdapter = new BracketAdapter(
             this,
             R.layout.game_list_item,
+            R.layout.game_list_item_header,
             this.bracketRandomizer.getCurrentBracket()
         );
 
-        bracketList.setAdapter(bracketAdapter);
+        bracketList.setAdapter(this.bracketAdapter);
 
         bracketList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -41,6 +51,11 @@ public class BracketActivity extends ActionBarActivity {
                 bracketAdapter.notifyDataSetChanged();
             }
         });
+
     }
 
+    public void playAll(View view) {
+        this.bracketRandomizer.playFullBracket();
+        this.bracketAdapter.notifyDataSetChanged();
+    }
 }

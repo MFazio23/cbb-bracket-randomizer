@@ -79,11 +79,14 @@ public class MainActivity extends ActionBarActivity implements DataLoaderActivit
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 try {
+                    final RandomizerInfo randomizerInfo = (RandomizerInfo) listView.getAdapter().getItem(position);
+
                     app.getBracketRandomizer().configureRandomizerAndBracket(
-                        ((RandomizerInfo) listView.getAdapter().getItem(position)).getRatingType()
+                        randomizerInfo.getRatingType()
                     );
 
                     final Intent intent = new Intent(getApplicationContext(), BracketActivity.class);
+                    intent.putExtra("randomizerType", randomizerInfo.getName());
 
                     startActivity(intent);
                 } catch (IOException e) {

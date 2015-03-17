@@ -112,4 +112,8 @@ public class BracketRandomizer {
     public void playGame(final int position) {
         this.currentBracket.playGame(position, this.randomizer, this.ratingType);
     }
+
+    public Randomizer getRandomizer() {
+        return randomizer;
+    }
 }

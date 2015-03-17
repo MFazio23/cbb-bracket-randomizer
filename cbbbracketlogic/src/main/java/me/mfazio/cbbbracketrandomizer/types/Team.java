@@ -19,6 +19,8 @@ public class Team {
     protected final String colorHex;
     protected final Map<Rating.RatingType, Rating> ratings;
 
+    public static final Team NullTeam = new Team();
+
     public Team() {
         // This is really just here for Gson.  I feel like there should be a better way to do this.
         this.schoolName = null;

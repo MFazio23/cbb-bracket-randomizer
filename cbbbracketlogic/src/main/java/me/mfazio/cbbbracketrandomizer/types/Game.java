@@ -5,10 +5,15 @@ package me.mfazio.cbbbracketrandomizer.types;
  */
 public class Game {
 
-    private final Team teamA;
-    private final Team teamB;
+    private Team teamA;
+    private Team teamB;
     private Team winner;
     private boolean gamePlayed;
+
+
+    public Game() {
+        this(null, null);
+    }
 
     public Game(final Team teamA, final Team teamB) {
         this.teamA = teamA;
@@ -20,8 +25,16 @@ public class Game {
         return teamA;
     }
 
+    public void setTeamA(Team teamA) {
+        this.teamA = teamA;
+    }
+
     public Team getTeamB() {
         return teamB;
+    }
+
+    public void setTeamB(Team teamB) {
+        this.teamB = teamB;
     }
 
     public boolean isGamePlayed() {
@@ -45,6 +58,8 @@ public class Game {
         final StringBuilder sb = new StringBuilder("Game{");
         sb.append("teamA=").append(teamA);
         sb.append(", teamB=").append(teamB);
+        sb.append(", winner=").append(winner);
+        sb.append(", gamePlayed=").append(gamePlayed);
         sb.append('}');
         return sb.toString();
     }

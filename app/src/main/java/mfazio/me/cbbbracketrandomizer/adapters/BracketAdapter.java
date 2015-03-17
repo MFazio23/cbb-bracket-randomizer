@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import me.mfazio.cbbbracketrandomizer.types.Bracket;
 import me.mfazio.cbbbracketrandomizer.types.Game;
+import me.mfazio.cbbbracketrandomizer.types.Team;
 import mfazio.me.cbbbracketrandomizer.R;
 
 /**
@@ -23,12 +24,14 @@ public class BracketAdapter extends BaseAdapter {
 
     private final Context context;
     private final int resource;
+    private final int headerResource;
     private final Bracket bracket;
     private final LayoutInflater inflater;
 
-    public BracketAdapter(final Context context, final int resource, final Bracket bracket) {
+    public BracketAdapter(final Context context, final int resource, final int headerResource, final Bracket bracket) {
         this.context = context;
         this.resource = resource;
+        this.headerResource = headerResource;
         this.bracket = bracket;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -50,17 +53,20 @@ public class BracketAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final View view = convertView != null ? convertView : this.inflater.inflate(this.resource, parent, false);
-
         final String roundName = this.getRoundName(position);
 
-        if (StringUtils.isNotEmpty(roundName)) {
-            final LinearLayout headerLayout = (LinearLayout) this.inflater.inflate(R.layout.game_list_item_header, parent, false);
-            final TextView headerTextView = (TextView) headerLayout.findViewById(R.id.round_text_view);
-            headerTextView.setText(roundName);
-        }
+        final View view =
+            this.inflater.inflate(
+                StringUtils.isNotEmpty(roundName) ? this.headerResource : this.resource,
+                parent,
+                false);
 
         final Game game = this.getItem(position);
+
+        if (StringUtils.isNotEmpty(roundName)) {
+            final TextView headerTextView = (TextView) view.findViewById(R.id.round_text_view);
+            headerTextView.setText(roundName);
+        }
 
         final TextView teamAName = (TextView) view.findViewById(R.id.team_a_name);
         final TextView teamASeed = (TextView) view.findViewById(R.id.team_a_seed);
@@ -71,7 +77,7 @@ public class BracketAdapter extends BaseAdapter {
         teamAName.setTextColor(baseTextColor);
         teamBName.setTextColor(baseTextColor);
 
-        if (game.isGamePlayed()) {
+        if (game != null && game.isGamePlayed()) {
             if (game.getTeamA().equals(game.getWinner())) {
                 teamAName.setTextColor(Color.parseColor(game.getTeamA().getColorHex()));
             } else {
@@ -79,15 +85,39 @@ public class BracketAdapter extends BaseAdapter {
             }
         }
 
-        teamAName.setText(game.getTeamA().getSchoolName());
-        teamASeed.setText(game.getTeamA().getSeed() + " seed");
-
-        if(game.getTeamB() != null) {
-            teamBName.setText(game.getTeamB().getSchoolName());
-            teamBSeed.setText(game.getTeamB().getSeed() + " seed");
+        if (game != null && game.getTeamA() != null) {
+            final Team teamA = game.getTeamA();
+            teamAName.setText(teamA.getSchoolName());
+            teamASeed.setText(teamA.getSeed() + " seed");
+        } else {
+            teamAName.setText("");
+            teamASeed.setText("");
+        }
+        if (game != null && game.getTeamB() != null) {
+            final Team teamB = game.getTeamB();
+            teamBName.setText(teamB.getSchoolName());
+            teamBSeed.setText(teamB.getSeed() + " seed");
         } else {
             teamBName.setText("");
             teamBSeed.setText("");
+        }
+        if (position == 63) {
+            final Team champion = game.getTeamA();
+            if (champion != null) {
+                view.findViewById(R.id.game_list_item).setVisibility(View.GONE);
+
+                final LinearLayout championLayout = (LinearLayout) view.findViewById(R.id.champion_layout);
+                championLayout.setVisibility(View.VISIBLE);
+
+                final TextView championName = (TextView) championLayout.findViewById(R.id.champion_name);
+                championName.setText(champion.getSchoolName());
+                championName.setTextColor(Color.parseColor(game.getTeamA().getColorHex()));
+
+                final TextView championSeed = (TextView) view.findViewById(R.id.champion_seed);
+                championSeed.setText(champion.getSeed() + " seed");
+
+                Log.wtf("Champion", champion.toString());
+            }
         }
 
         return view;
@@ -107,8 +137,10 @@ public class BracketAdapter extends BaseAdapter {
                 return "National Semifinals";
             case 62:
                 return "National Championship";
+            case 63:
+                return "NATIONAL CHAMPION";
+            default:
+                return null;
         }
-
-        return null;
     }
 }
