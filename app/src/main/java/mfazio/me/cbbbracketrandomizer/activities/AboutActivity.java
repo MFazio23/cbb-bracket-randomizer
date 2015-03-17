@@ -40,7 +40,7 @@ public class AboutActivity extends ActionBarActivity {
     public void goToEmail(View view) {
         final Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setType("*/*");
-        intent.putExtra(Intent.EXTRA_EMAIL, "android@mfazio.me");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"android@mfazio.me"});
         intent.setData(Uri.parse("mailto:"));
         startActivity(intent);
     }
